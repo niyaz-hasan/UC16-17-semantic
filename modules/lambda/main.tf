@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "this" {
+  filename         = var.lambda_zip
   function_name = var.function_name
-  filename      = var.lambda_zip
   handler       = var.handler
   # handler       = main.lambda_handler
   runtime       = var.runtime
