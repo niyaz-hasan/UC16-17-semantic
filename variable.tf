@@ -10,6 +10,11 @@ variable "vpc_cidr" {
   type        = string
 }
 
+variable "aws_region" {
+  description = "region name"
+  type        = string
+}
+
 variable "name" {
   description = "VPC name"
   type        = string

@@ -13,6 +13,7 @@ lambda_code_bucket      = "lambda-code-bucket-ddd"
 ingest_lambda_key       = "ingest.zip"
 search_lambda_key       = "search.zip"
 query_lambda_key        = "query.zip"
+aws_region              = "us-east-1"
 
 ingest_lambda_name      = "semantic-ingest"
 search_lambda_name      = "semantic-search"
