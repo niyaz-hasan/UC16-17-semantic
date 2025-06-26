@@ -5,7 +5,7 @@ variable "bucket_name" {
 #   type = string 
 # }
 
-variable "vpc_cidr" {
+variable "vpc_cidr_block" {
   description = "CIDR block for the VPC"
   type        = string
 }

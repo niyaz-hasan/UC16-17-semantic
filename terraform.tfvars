@@ -2,7 +2,7 @@ bucket_name         = "semantic-search-raw-ddd"
 # processed_bucket_name   = "semantic-search-processed-ddd"
 
 name = "demo"
-vpc_cidr                = "10.0.0.0/16"
+vpc_cidr_block          = "10.0.0.0/16"
 db_name                 = "semanticdb"
 db_username             = "postgres"
 db_password             = "supersecretpassword"
