@@ -1,6 +1,6 @@
-resource "aws_lambda_layer_version" "psycopg2" {
-  filename            = var.psycopg2_layer_zip
-  layer_name          = "psycopg2"
+resource "aws_lambda_layer_version" "semantic_layer" {
+  filename            = var.semantic_layer_zip
+  layer_name          = "semantic_layer"
   compatible_runtimes = ["python3.9"]
 }
 
@@ -31,7 +31,7 @@ resource "aws_lambda_function" "this" {
   #     arn = layers.value
   #   }
   # }
-  layers = [aws_lambda_layer_version.psycopg2.arn]
+  layers = [aws_lambda_layer_version.semantic_layer.arn]
 
   reserved_concurrent_executions = var.reserved_concurrent_executions
 
