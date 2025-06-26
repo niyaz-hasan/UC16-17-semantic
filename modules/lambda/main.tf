@@ -1,13 +1,13 @@
 resource "aws_lambda_function" "this" {
   function_name = var.function_name
-  s3_bucket     = var.s3_bucket
-  s3_key        = var.s3_key
+  filename      = var.lambda_zip
   handler       = var.handler
   # handler       = main.lambda_handler
   runtime       = var.runtime
   role          = var.role_arn
   timeout       = var.timeout
   memory_size   = var.memory_size
+  source_code_hash = filebase64sha256(var.lambda_zip)
 
   environment {
     variables = var.environment_vars

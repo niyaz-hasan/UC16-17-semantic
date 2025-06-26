@@ -1,33 +1,63 @@
-resource "aws_iam_role" "this" {
-  name = var.role_name
+resource "aws_iam_role" "lambda_exec" {
+  name = "lambda_semantic_exec"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
-      Effect = "Allow",
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
       Principal = {
         Service = "lambda.amazonaws.com"
-      },
-      Action = "sts:AssumeRole"
+      }
     }]
   })
-  tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "this" {
-  count      = length(var.policy_arns)
-  policy_arn = var.policy_arns[count.index]
-  role       = aws_iam_role.this.name
+resource "aws_iam_policy" "lambda_policy" {
+  name = "lambda_semantic_policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "s3:GetObject",
+          "s3:ListBucket"
+        ]
+        Effect   = "Allow"
+        Resource = ["arn:aws:s3:::${var.bucket_name}", "arn:aws:s3:::${var.bucket_name}/*"]
+      },
+      {
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
 }
 
-resource "aws_iam_role_policy" "custom_inline" {
-  count = var.inline_policy != null ? 1 : 0
-
-  name = "${var.role_name}-inline"
-  role = aws_iam_role.this.id
-
-  policy = var.inline_policy
+resource "aws_iam_role_policy_attachment" "attach_policy" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = aws_iam_policy.lambda_policy.arn
 }
 
-# output "iam_role_arn" {
-#   value = aws_iam_role.this.arn
-# }
+
+resource "aws_iam_role_policy_attachment" "AWSLambdaExecute_attach_policy" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSLambdaExecute"
+}
+
+resource "aws_iam_role_policy_attachment" "AmazonBedrockFull_attach_policy" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
+}
+
+
+resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccess_attach_policy" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}

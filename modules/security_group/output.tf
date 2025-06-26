@@ -1,4 +1,5 @@
-output "security_group_id" {
-  description = "The ID of the security group"
-  value       = aws_security_group.this.id
+output "rds_security_group_aurora_id" {
+  description = "Security group ID for the RDS"
+  value       = aws_security_group.rds_sg.id 
 }
+
