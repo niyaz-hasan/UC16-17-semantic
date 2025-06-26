@@ -5,7 +5,7 @@ name = "demo"
 vpc_cidr_block          = "10.0.0.0/16"
 db_name                 = "semanticdb"
 db_username             = "postgres"
-db_password             = "supersecretpassword"
+db_password             = "II8xr9hqEHBDa3c"
 db_instance_class       = "db.t3.micro"
 db_secret_name          = "semantic-search-db-credentialsed"
 
