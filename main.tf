@@ -102,7 +102,7 @@ module "lambda_ingest" {
   depends_on = [
     module.s3_bucket,
     module.vpc,
-    module.lambda_sg,
+    module.rds_sg,
     module.lambda_iam_role,
     module.db_secret
   ]
