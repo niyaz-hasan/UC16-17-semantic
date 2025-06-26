@@ -1,5 +1,5 @@
 module "s3_bucket" {
-  source      = "../modules/s3"
+  source      = "./modules/s3"
   bucket_name = var.bucket_name
   tags        = var.tags
 }
@@ -17,7 +17,7 @@ module "vpc" {
 
 
 #module "lambda_sg" {
-#  source        = "../modules/security_group"
+#  source        = "./modules/security_group"
 #  name          = "lambda-sg"
 #  description   = "SG for Lambda"
 #  vpc_id        = module.vpc.vpc_id
@@ -29,7 +29,7 @@ module "vpc" {
 #}
 
 module "rds_sg" {
-  source        = "../modules/security_group"
+  source        = "./modules/security_group"
   vpc_id        = module.vpc.vpc_id
   depends_on = [
     module.s3_bucket,
@@ -38,7 +38,7 @@ module "rds_sg" {
 }
 
 module "rds_postgres" {
-  source            = "../modules/rds_postgresql"
+  source            = "./modules/rds_postgresql"
   db_name           = var.db_name
   db_username       = var.db_username
   db_password       = var.db_password
@@ -54,7 +54,7 @@ module "rds_postgres" {
 }
 
 module "db_secret" {
-  source      = "../modules/secrets_manager"
+  source      = "./modules/secrets_manager"
   secret_name = var.db_secret_name
   secret_value = jsonencode({
     username = var.db_username
@@ -66,7 +66,7 @@ module "db_secret" {
 
 
 module "lambda_iam_role" {
-  source      = "../modules/iam_role"
+  source      = "./modules/iam_role"
   bucket_name = module.s3_bucket.bucket_name
 }
 
@@ -83,7 +83,7 @@ data "archive_file" "lambda_zip_query" {
 }
 
 module "lambda_ingest" {
-  source          = "../modules/lambda"
+  source          = "./modules/lambda"
   function_name   = var.ingest_lambda_name
   lambda_zip      = data.archive_file.lambda_zip_ingest.output_path
   # handler         = var.ingest_lambda_handler
@@ -110,7 +110,7 @@ module "lambda_ingest" {
 }
 
 #module "lambda_search" {
-#  source          = "../modules/lambda"
+#  source          = "./modules/lambda"
 #  function_name   = var.search_lambda_name
 #  s3_bucket       = var.lambda_code_bucket
 #  s3_key          = var.search_lambda_key
@@ -138,7 +138,7 @@ module "lambda_ingest" {
 #}
 #
 #module "lambda_query" {
-#  source          = "../modules/lambda"
+#  source          = "./modules/lambda"
 #  function_name   = var.query_lambda_name
 #  s3_bucket       = var.lambda_code_bucket
 #  s3_key          = var.query_lambda_key
@@ -165,7 +165,7 @@ module "lambda_ingest" {
 #}
 
 #module "search_api" {
-#  source     = "../modules/api_gateway"
+#  source     = "./modules/api_gateway"
 #  api_name   = var.api_name
 #  stage_name = var.api_stage_name
 #  tags       = var.tags
