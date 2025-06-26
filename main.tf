@@ -95,7 +95,7 @@ module "lambda_ingest" {
   }
   vpc_config = {
     subnet_ids         = module.vpc.private_subnets
-    security_group_ids = [module.lambda_sg.security_group_id]
+    security_group_ids = [module.rds_sg.security_group_id]
   }
   tags = var.tags
 
