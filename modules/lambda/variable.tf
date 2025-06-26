@@ -4,9 +4,9 @@ variable "function_name" {
 variable "lambda_zip" { 
   type = string 
 }
-variable "s3_key" { 
-  type = string 
-}
+#variable "s3_key" { 
+#  type = string 
+#}
 variable "handler" { 
   type = string
   default = "main.lambda_handler" 
