@@ -86,6 +86,7 @@ module "lambda_ingest" {
   source          = "./modules/lambda"
   function_name   = var.ingest_lambda_name
   lambda_zip      = data.archive_file.lambda_zip_ingest.output_path
+  psycopg2_layer_zip     = "${path.module}/lambda_package.zip"
   # handler         = var.ingest_lambda_handler
   runtime         = var.lambda_runtime
   role_arn        = module.lambda_iam_role.iam_role_arn

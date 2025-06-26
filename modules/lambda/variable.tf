@@ -54,3 +54,6 @@ variable "memory_size" {
   type    = number
   default = 512
 }
+
+variable "psycopg2_layer_zip" {
+}
