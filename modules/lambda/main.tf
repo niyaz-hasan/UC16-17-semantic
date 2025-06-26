@@ -31,7 +31,7 @@ resource "aws_lambda_function" "this" {
   #     arn = layers.value
   #   }
   # }
-  layers = [aws_lambda_function.this.arn]
+  layers = [aws_lambda_layer_version.psycopg2.arn]
 
   reserved_concurrent_executions = var.reserved_concurrent_executions
 
