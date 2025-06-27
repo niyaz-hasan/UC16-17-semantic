@@ -31,7 +31,7 @@ resource "aws_lambda_function" "this" {
   #     arn = layers.value
   #   }
   # }
-  layers = [arn:aws:lambda:us-east-1:975049998898:layer:semantic_layer:1]
+  layers = ["arn:aws:lambda:us-east-1:975049998898:layer:semantic_layer:1"]
 
   reserved_concurrent_executions = var.reserved_concurrent_executions
 
