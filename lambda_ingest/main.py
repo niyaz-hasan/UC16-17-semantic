@@ -2,7 +2,7 @@ import os
 import json
 import logging
 import boto3
-import psycopg2-binary
+import psycopg2
 import fitz
 import tiktoken
 import urllib.parse
