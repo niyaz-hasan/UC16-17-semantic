@@ -22,7 +22,7 @@ query_lambda_name       = "semantic-query"
 # search_lambda_handler   = "search_lambda.handler"
 
 
-lambda_runtime          = "python3.11"
+lambda_runtime          = "python3.12"
 lambda_role_name        = "semantic-lambda-role"
 #api_name                = "semantic-search-api"
 
