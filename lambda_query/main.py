@@ -2,7 +2,7 @@ import os
 import json
 import logging
 import boto3
-import psycopg2
+import psycopg2_binary
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
